@@ -83,11 +83,6 @@
 	[coder encodeBool: [self useTransparentWell] forKey: @"useTransparentWell"];
 }
 
--(void)dealloc {
-	
-	[themeKey release];
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Drawing Methods
@@ -116,7 +111,7 @@
 }
 
 - (void)drawWellInside:(NSRect) rect {
-	
+    
 	if([self isBordered]) {
 	
 		rect = NSInsetRect(rect, 5, 5);
@@ -126,10 +121,10 @@
 	}
 	
 	if([self useTransparentWell]) {
-		
-		NSColor *newColor = [NSColor colorWithDeviceRed: [[self color] redComponent]
-												  green: [[self color] greenComponent]  
-												   blue: [[self color] blueComponent] 
+        NSColor *safeColor = [[self color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+		NSColor *newColor = [NSColor colorWithDeviceRed: [safeColor redComponent]
+												  green: [safeColor greenComponent]
+												   blue: [safeColor blueComponent]
 												  alpha: [[[BGThemeManager keyedManager] themeForKey: self.themeKey] alphaValue]];
 		[newColor set];
 	} else {

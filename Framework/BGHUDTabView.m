@@ -110,7 +110,6 @@
     [myCell setSegmentStyle: NSSegmentStyleRounded];
     
     [self _setTabsCell: myCell];
-    [myCell release];
 	return self;
 }
 
@@ -356,10 +355,5 @@
     return NO;
 }
 
--(void)dealloc {
-	
-	[themeKey release];
-	[super dealloc];
-}
 
 @end

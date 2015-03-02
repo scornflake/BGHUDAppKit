@@ -111,30 +111,26 @@
 	cellFrame.size.height = [self cellSize].height;
 	
 	switch ([self bezelStyle]) {
-			
-		case NSTexturedRoundedBezelStyle:
-			
-			[self drawTexturedRoundedButtonInFrame: cellFrame];
-			break;
-			
 		case NSRoundRectBezelStyle:
-			
 			[self drawRoundRectButtonInFrame: cellFrame];
 			break;
 			
 		case NSSmallSquareBezelStyle:
-			
 			[self drawSmallSquareButtonInFrame: cellFrame];
 			break;
 			
 		case NSRoundedBezelStyle:
-			
 			[self drawRoundedButtonInFrame: cellFrame];
 			break;
 			
 		case NSRecessedBezelStyle:
 			[self drawRecessedButtonInFrame: cellFrame];
 			break;
+            
+        default:
+        case NSTexturedRoundedBezelStyle:
+            [self drawTexturedRoundedButtonInFrame: cellFrame];
+            break;
 	}
 	
 	if(buttonType == NSSwitchButton || buttonType == NSRadioButton) {
@@ -216,7 +212,6 @@
 		[super drawTitle: newTitle withFrame: textRect inView: controlView];
 	}
 	
-	[newTitle release];
 	return textRect;
 }
 
@@ -407,7 +402,6 @@
 	[path stroke];
 	
 	//path = nil;
-	[path release];
 	
 	if([self imagePosition] != NSImageOnly) {
 		
@@ -512,7 +506,6 @@
 	[path setLineWidth: 1.0f];
 	[path stroke];
 	
-	[path release];
 	
 	if([self imagePosition] != NSImageOnly) {
 		
@@ -593,7 +586,6 @@
 	[path setLineWidth: 1.0f];
 	[path stroke];
 	
-	[path release];
 	
 	if([self imagePosition] != NSImageOnly) {
 		
@@ -698,7 +690,6 @@
 		[[[[BGThemeManager keyedManager] themeForKey: self.themeKey] disabledNormalSolidFill] set];
 	}
 	
-	[path release];
 	
 	if([self imagePosition] != NSImageOnly) {
 		
@@ -893,7 +884,6 @@
 	[path setLineWidth: 1.0f];
 	[path stroke];
 	
-	[path release];
 	
 	// Draw Glyphs for On/Off/Mixed States
 	switch ([self state]) {
@@ -919,7 +909,6 @@
 			[path setLineWidth: 2.0f];
 			[path stroke];
 			
-			[path release];
 			
 			break;
 			
@@ -962,7 +951,6 @@
 				}
 				[path fill];
 				
-				[path release];
 			} else {
 				
 				path = [[NSBezierPath alloc] init];
@@ -993,7 +981,6 @@
 				
 				[path stroke];
 				
-				[path release];
 			}
 			
 			break;
@@ -1088,7 +1075,6 @@
 		[[[[BGThemeManager keyedManager] themeForKey: self.themeKey] disabledNormalSolidFill] set];
 	}
 	
-	[path release];
 	
 	if([self imagePosition] != NSImageOnly) {
 		[self drawTitle: [self attributedTitle] withFrame: textFrame inView: [self controlView]];
@@ -1114,11 +1100,6 @@
 #pragma mark -
 #pragma mark Helper Methods
 
--(void)dealloc {
-	
-	[themeKey release];
-	[super dealloc];
-}
 
 -(void)setValue:(id) value forKey:(NSString *) key {
 	
